@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
 use App\http\Controllers\LoginController;
+use App\http\Controllers\LogoutController;
 use App\http\Controllers\HomeController;
 
 Route::group([
@@ -14,6 +15,7 @@ Route::group([
     Route::get('facebook/redirect', [LoginController::class, 'facebookRedirect'])->name('facebook');
     Route::get('facebook/callback', [LoginController::class, 'facebookCallback']);
     Route::get('login', [LoginController::class, 'show'])->name('login');
+    Route::get('logout', [LogoutController::class, 'show'])->name('logout');
 });
 Route::group([
     'middleware'    => 'user'
