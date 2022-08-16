@@ -8,7 +8,12 @@
                     @isset($data)
                         {{$data}}
                     @endisset
-                    <a class="btn btn-outline-danger" href="{{route('auth-google')}}">Google</a>
+                    <div class="d-grid mb-3">
+                        <a class="btn btn-outline-danger" href="{{route('auth-google')}}">login with Google</a>
+                    </div>
+                    <div class="d-grid mb-3">
+                        <a class="btn btn-outline-primary" href="{{route('auth-facebook')}}">login with Facebook</a>
+                    </div>
                 </div>
             </div>
         </div>

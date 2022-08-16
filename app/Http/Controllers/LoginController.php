@@ -20,6 +20,20 @@ class LoginController extends Controller
         ]);
         return redirect()->route('home');
     }
+    
+    public function facebookRedirect()
+    {
+        return Socialite::driver('facebook')->redirect();
+    }
+    public function facebookCallback()
+    {
+        $user = Socialite::driver('facebook')->user();
+        $name = $user->name;
+        session([
+            'name'  => $name
+        ]);
+        return redirect()->route('home');
+    }
     public function show()
     {
         return view('auth.login');
