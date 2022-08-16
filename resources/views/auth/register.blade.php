@@ -10,7 +10,7 @@
                         <input type="text" class="form-control mb-3" name="name" placeholder="name"/>
                         <input type="text" class="form-control mb-3" name="email" placeholder="email"/>
                         <input type="password" class="form-control mb-3" name="password" placeholder="password"/>
-                        <input type="password" class="form-control mb-3" name="re-password" placeholder="password"/>
+                        <input type="password" class="form-control mb-3" name="re-password" placeholder="retype password"/>
                     </form>
                     <div class="d-grid mb-3">
                         <a class="btn btn-outline-danger" href="{{route('auth-google')}}">login with Google</a>
@@ -18,6 +18,7 @@
                     <div class="d-grid mb-3">
                         <a class="btn btn-outline-primary" href="{{route('auth-facebook')}}">login with Facebook</a>
                     </div>
+                    already have account? <a href="{{route('auth-login')}}">login</a>
                 </div>
             </div>
         </div>
