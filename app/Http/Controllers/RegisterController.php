@@ -46,11 +46,11 @@ class RegisterController extends Controller
             return redirect()->route('auth-register');
         }
 
-        // dd($password);
         $create = User::create([
-            'name'  => $name,
-            'email' => $email,
-            'password'  => $password
+            'name'      => $name,
+            'email'     => $email,
+            'password'  => $password,
+            'oauth'     => 0
         ]);
         
         if(!$create)

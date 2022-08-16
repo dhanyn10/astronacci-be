@@ -16,8 +16,25 @@ class LoginController extends Controller
     }
     public function googleCallback()
     {
-        $user = Socialite::driver('google')->user();
-        $name = $user->name;
+        $user   = Socialite::driver('google')->user();
+        $email  = $user->email;
+        $name   = $user->name;
+        $getdata = User::where('email', $email)->get();
+        //automatically create new user
+        if(count($getdata) == 0)
+        {
+            $create = User::create([
+                'name'  => $name,
+                'email' => $email,
+                'oauth' => 1
+            ]);
+
+            if(!$create)
+            {
+                flash('failed to create new user', 'danger');
+                return redirect()->route('auth-login');
+            }
+        }
         session([
             'name'  => $name
         ]);
