@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
+use App\Models\UserLimit;
 
 use Validator;
 
@@ -28,15 +29,26 @@ class LoginController extends Controller
                 'email' => $email,
                 'oauth' => 1
             ]);
+            
+            $userLimit = UserLimit::create([
+                'email' => $email
+            ]);
 
             if(!$create)
             {
                 flash('failed to create new user', 'danger');
                 return redirect()->route('auth-login');
             }
+
+            if(!$userLimit)
+            {
+                flash('create new limit error', 'danger');
+                return redirect()->route('auth-login');
+            }
         }
         session([
-            'name'  => $name
+            'name'  => $name,
+            'email' => $email
         ]);
         return redirect()->route('home');
     }

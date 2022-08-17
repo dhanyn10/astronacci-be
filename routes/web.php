@@ -28,4 +28,5 @@ Route::group([
 ], function () {
     Route::get('/', [HomeController::class, 'show'])->name('home');
     Route::get('settings', [SettingsController::class, 'show'])->name('settings');
+    Route::post('settings', [SettingsController::class, 'update']);
 });

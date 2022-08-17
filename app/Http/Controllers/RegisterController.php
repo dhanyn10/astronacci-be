@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserLimit;
 
 use Validator;
 
@@ -52,10 +53,20 @@ class RegisterController extends Controller
             'password'  => $password,
             'oauth'     => 0
         ]);
+
+        $userLimit = UserLimit::create([
+            'email' => $email
+        ]);
         
         if(!$create)
         {
-            flash('create new data error', 'danger');
+            flash('create new user error', 'danger');
+            return redirect()->route('auth-register');
+        }
+
+        if(!$userLimit)
+        {
+            flash('create new limit error', 'danger');
             return redirect()->route('auth-register');
         }
         
