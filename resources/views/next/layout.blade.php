@@ -6,7 +6,11 @@
             @include('sidebar')
         </div>
         <div class="col-md-8">
-            @yield('next-content')
+            <div class="card">
+                <div class="card-body">
+                    @yield('next-content')
+                </div>
+            </div>
         </div>
     </div>
 </div>
