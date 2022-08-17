@@ -21,6 +21,7 @@ class LoginController extends Controller
         $email  = $user->email;
         $name   = $user->name;
         $getdata = User::where('email', $email)->get();
+        $role   = $getdata->pluck('role')->first();
         //automatically create new user
         if(count($getdata) == 0)
         {
@@ -48,7 +49,8 @@ class LoginController extends Controller
         }
         session([
             'name'  => $name,
-            'email' => $email
+            'email' => $email,
+            'role'  => $role
         ]);
         return redirect()->route('home');
     }
@@ -60,9 +62,40 @@ class LoginController extends Controller
     public function facebookCallback()
     {
         $user = Socialite::driver('facebook')->user();
-        $name = $user->name;
+        $email  = $user->email;
+        $name   = $user->name;
+        $getdata = User::where('email', $email)->get();
+        $role   = $getdata->pluck('role')->first();
+        //automatically create new user
+        if(count($getdata) == 0)
+        {
+            $create = User::create([
+                'name'  => $name,
+                'email' => $email,
+                'oauth' => 1
+            ]);
+            
+            $userLimit = UserLimit::create([
+                'email' => $email
+            ]);
+
+            if(!$create)
+            {
+                flash('failed to create new user', 'danger');
+                return redirect()->route('auth-login');
+            }
+
+            if(!$userLimit)
+            {
+                flash('create new limit error', 'danger');
+                return redirect()->route('auth-login');
+            }
+        }
+        
         session([
-            'name'  => $name
+            'name'  => $name,
+            'email' => $email,
+            'role'  => $role
         ]);
         return redirect()->route('home');
     }
@@ -102,11 +135,17 @@ class LoginController extends Controller
         }
 
         $getName = $getUser->pluck('name')->first();
+        $role = $getUser->pluck('role')->first();
         session([
-            'name' => $getName
+            'name'  => $getName,
+            'email' => $email,
+            'role'  => $role
         ]);
 
-        return redirect()->route('home');
+        if($role == 0)
+            return redirect()->route('home');
+        else
+            return redirect()->route('admin-home');
 
     }
 }
