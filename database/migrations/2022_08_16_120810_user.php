@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->smallInteger('role')->default(0);
             $table->string('password')->nullable();
             $table->smallInteger('oauth')->default(0);
         });
