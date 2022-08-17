@@ -6,6 +6,7 @@ use App\http\Controllers\RegisterController;
 use App\http\Controllers\LoginController;
 use App\http\Controllers\LogoutController;
 use App\http\Controllers\HomeController;
+use App\http\Controllers\SettingsController;
 
 Route::group([
     'prefix'        => 'auth',
@@ -26,4 +27,5 @@ Route::group([
     'middleware'    => 'user'
 ], function () {
     Route::get('/', [HomeController::class, 'show'])->name('home');
+    Route::get('settings', [SettingsController::class, 'show'])->name('settings');
 });
