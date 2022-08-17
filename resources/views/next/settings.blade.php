@@ -3,7 +3,11 @@
     <h3>Choose Membership</h3>
     <div class="row">
         <div class="col-sm-4">
+            @if ($type == 1)
+            <div class="card border-secondary">
+            @else
             <div class="card">
+            @endif
                 <div class="card-header">A</div>
                 <div class="card-body">
                     <form method="post">
@@ -17,7 +21,11 @@
             </div>
         </div>
         <div class="col-sm-4">
+            @if ($type == 2)
+            <div class="card border-primary">
+            @else
             <div class="card">
+            @endif
                 <div class="card-header">B</div>
                 <div class="card-body">
                     <form method="post">
@@ -31,7 +39,11 @@
             </div>
         </div>
         <div class="col-sm-4">
+            @if ($type == 3)
+            <div class="card border-danger">
+            @else
             <div class="card">
+            @endif
                 <div class="card-header">C</div>
                 <div class="card-body">
                     <form method="post">
