@@ -7,6 +7,7 @@ use App\http\Controllers\LoginController;
 use App\http\Controllers\LogoutController;
 use App\http\Controllers\HomeController;
 use App\http\Controllers\SettingsController;
+use App\http\Controllers\AdminController;
 
 Route::group([
     'prefix'        => 'auth',
@@ -23,6 +24,15 @@ Route::group([
     Route::post('register', [RegisterController::class, 'register']);
     Route::post('login', [LoginController::class, 'login']);
 });
+
+Route::group([
+    'middleware'    => 'admin',
+    'as'            => 'admin-',
+    'prefix'        => 'admin'
+], function () {
+    Route::get('/', [AdminController::class, 'show'])->name('home');
+});
+
 Route::group([
     'middleware'    => 'user'
 ], function () {
