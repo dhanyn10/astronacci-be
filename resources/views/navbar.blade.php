@@ -1,7 +1,7 @@
 <!-- As a link -->
 <nav class="navbar navbar-expand-md bg-light mb-3">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">{{config('app.name')}}</a>
+        <a class="navbar-brand" href="{{route('home')}}">{{config('app.name')}}</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
