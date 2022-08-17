@@ -1,4 +1,4 @@
 <ul class="list-group">
-    <li class="list-group-item">Profile</li>
-    <li class="list-group-item">Settings</li>
+    <a class="list-group-item" href="">Profile</a>
+    <a class="list-group-item" href="{{route('settings')}}">Settings</a>
 </ul>
